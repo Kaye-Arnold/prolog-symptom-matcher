@@ -1,0 +1,47 @@
+name: Prolog Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify required repository structure
+        run: bash scripts/check_structure.sh
+
+      - name: Install SWI-Prolog
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes swi-prolog
+
+      - name: Check that Prolog files load
+        run: |
+          shopt -s nullglob
+          files=(src/*.pl queries/*.pl tests/*.pl)
+          if ((${#files[@]} == 0)); then
+            echo "No Prolog files found."
+            exit 1
+          fi
+          for file in "${files[@]}"; do
+            echo "Loading $file"
+            swipl -q -g "load_files(['$file']), halt"
+          done
+
+      - name: Run PLUnit suites when defined
+        run: |
+          if grep -Rqs --include='*.pl' -E ':-[[:space:]]*begin_tests' tests; then
+            test -f tests/run_tests.pl
+            swipl -q -g run_tests -t halt tests/run_tests.pl
+          else
+            echo "No PLUnit suites defined yet; proposal-stage scaffold only."
+          fi
