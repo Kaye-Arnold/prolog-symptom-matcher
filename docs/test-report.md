@@ -3,11 +3,11 @@
 **Scope:** Current review-branch implementation and tests; historical snapshot
 evidence is kept separate.
 **Run date:** 9 November 2026 (UTC; user timezone UTC).
-**Current revision:** The full clean suite and smoke checks were re-run on the
-current working tree on 9 November 2026 after the report, PPTX, checklist, and
-snapshot assessment were added. Source/test files are unchanged from the earlier
-suite run. This result is from an uncommitted working tree; enter the exact
-verified source commit after committing, and keep report-only changes distinct.
+**Verified source/test commit:** `849496339bb36d8c2860bc4b98ad19e9d66bf068`.
+The full clean suite, workflow-equivalent loads, demo, queries, interactive
+smoke, structure check, launcher-format check, and PPTX package check were
+re-run on this clean commit on 9 November 2026. The report-only update after that
+run does not change source or tests; any further code change requires a new run.
 **Windows:** not run for this revision.
 
 ## Environment
@@ -77,8 +77,9 @@ The shell variable resolves to the recorded runtime path:
 
 ## Disposable mutation and runner-control checks
 
-**Method:** Four fresh copies of the working tree were made under
-`/tmp/prolog-ci-controls/`, excluding `.git` and generated/cache directories.
+**Method:** Four fresh copies of the committed source tree at
+`849496339bb36d8c2860bc4b98ad19e9d66bf068` were made under
+`/tmp/prolog-ci-controls-849/`, excluding `.git` and generated/cache directories.
 All edits below occurred only in these disposable copies. For data mutations,
 the changed source line and pre/post SHA-256 were checked before running the
 same `swipl -q -s tests/run_tests.pl` runner. The source tree in this repository
@@ -107,7 +108,9 @@ not evidence they run in Windows. GitHub Actions status is not inferred here.
 
 ## Remaining validation
 
-- Re-run structure, load, integrated tests, and demos on the exact final commit.
+- Linux source/test verification on commit
+  `849496339bb36d8c2860bc4b98ad19e9d66bf068` passed; rerun if Prolog or test
+  sources change after that commit.
 - Run on Windows using the official installer and record OS/build, SWI-Prolog
   version, command, result, and commit.
 - Observe and record GitHub Actions only if a run is actually available.

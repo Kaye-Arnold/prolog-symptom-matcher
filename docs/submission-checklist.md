@@ -62,6 +62,7 @@ artifacts are present. Final submission is **not complete**.
 |---|---|
 | Scope approval by | Pending; no approval recorded |
 | Team names / registration numbers / roles | Pending team confirmation |
+| Current local Linux source/test commit | `849496339bb36d8c2860bc4b98ad19e9d66bf068`; SWI-Prolog 10.0.2; 64 declarations / 180 passing executions |
 | Current Windows run | Pending |
 | Oral defense | Pending |
 | Video filename / duration | Pending; no recording |
