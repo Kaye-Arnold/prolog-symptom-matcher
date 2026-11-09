@@ -1,8 +1,12 @@
 # Stage 1 Project Proposal and Problem Specification
 
-> **Status:** Needs team review  
-> **Scope and interface:** Proposed; pending confirmation  
-> **Implementation and testing:** Not started
+> **Status:** Draft; needs team review
+>
+> **Scope and interface:** Proposed; no team/lecturer approval is recorded
+>
+> **Implementation:** Present on the review branch; not evidence of scope approval
+>
+> **Verification:** Linux evidence is recorded in `docs/test-report.md`; current Windows verification is pending
 
 ## 1. Project title
 
@@ -12,8 +16,8 @@
 
 - **Course:** Logic Programming
 - **Language:** SWI-Prolog
-- **Assignment value:** 100 points
-- **Submission deadline:** 9 November 2026 at 11:59 PM EAT (Africa/Kampala)
+- **Assignment value:** Not stated in the authoritative PDF; the scaffold's previous 100-point figure is unsupported.
+- **Submission deadline:** User-provided as 9 November 2026 at 23:59 EAT (Africa/Kampala); the PDF does not state a deadline.
 - **Team:** Verified member details must be imported from the team’s records; do not infer names or registration numbers.
 - **Team Lead and other roles:** Pending group confirmation unless documented otherwise.
 - **Separate marking rubric:** Not supplied.
@@ -61,8 +65,8 @@ To design, implement, test, document, and demonstrate an educational SWI-Prolog 
 - Transparent reporting of all eligible matches, including ties.
 - Matched symptoms, reported symptoms not matched to a candidate, and terms unknown to the application vocabulary.
 - Explicit no-match behavior and input validation.
-- A proposed console interface.
-- Demonstration queries, executable tests, documentation, and an oral defense.
+- A console interface implemented for review; scope approval remains pending.
+- Demonstration queries, executable tests, documentation, a report, a deck, and oral-defense preparation.
 
 ### Excluded
 
@@ -76,16 +80,15 @@ To design, implement, test, document, and demonstrate an educational SWI-Prolog 
 
 ## 8. Required knowledge
 
-The knowledge base will require:
+The implemented knowledge base contains:
 
 - canonical identifiers for the four proposed conditions;
 - a controlled vocabulary of educational symptom terms;
-- condition–symptom relationships supported by recorded sources;
-- identification of relationships shared by multiple conditions;
-- source provenance for each relationship or documented group of relationships;
-- a clear distinction between source-backed knowledge and simplifications introduced for the assignment;
-- an explicit policy for unknown terms and duplicate input;
-- a documented, explainable overlap or coverage calculation approved before implementation.
+- source-linked condition–symptom relationships with stored qualifiers;
+- retrieval queries and an explicit policy for unknown and duplicate input;
+- an exact software overlap fraction with documented denominator and tie behaviour.
+
+The four-condition scope and scoring design are implementation choices for review; no team/lecturer approval is recorded. Source pages and their limits are documented in `docs/source-register.md`.
 
 Symptoms will not be described as necessary, sufficient, or clinically definitive unless a reliable source supports that exact claim and the design appropriately represents it. The default representation will be a limited educational association, not a complete clinical profile.
 
@@ -154,10 +157,10 @@ The team will submit the proposal, knowledge-representation design, Prolog facts
 - Team content review and approval of this proposal.
 - Verified team-member details and agreed roles.
 - Lecturer confirmation of the illness set and console interface.
-- Reputable sources and source-backed condition–symptom relationships.
-- Final overlap/coverage definition.
-- Any separately prescribed report or presentation format.
+- Team/lecturer review of the selected sources, mappings, four-condition scope, and console interface.
+- Team/lecturer review of the implemented overlap/coverage definition.
+- Any separately prescribed report or presentation format not included in the supplied PDF.
 
 ## 16. References
 
-The authoritative assignment brief is `docs/Project.pdf`. External medical references have not yet been verified for encoding and must be recorded in `docs/sources.md` before the corresponding facts are treated as sourced.
+The authoritative assignment brief is `docs/Project.pdf`. The current external pages and their source-backed mappings are recorded in `docs/sources.md` and `docs/source-register.md`; formal scope and team/lecturer review remain pending.

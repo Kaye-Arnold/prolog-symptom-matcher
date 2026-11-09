@@ -47,4 +47,4 @@ A reviewer must check:
 
 ## Project stage
 
-The repository currently contains planning scaffolding only. Application completion must not be inferred from the existence of directories, workflows, or placeholder Prolog files.
+The repository now contains a review-branch Prolog implementation, executable PLUnit suites, source documentation, a report, and a presentation deck. Its four-condition scope and console interface remain proposed pending team/lecturer review. Local Linux evidence is recorded in `docs/test-report.md`; Windows re-verification of this revision, the required Google Drive video, human review, and final submission remain pending. The earlier snapshot code did run on Windows (user-confirmed; see `docs/historical-evidence-index.md`), but do not apply those historical records to the current source. Application completion must be judged from executable behavior and the requirement traceability, not from file names alone.

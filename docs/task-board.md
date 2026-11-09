@@ -1,76 +1,45 @@
-# Project Task Board and Schedule
+# Project Task Board and Submission Status
 
-**Deadline:** 9 November 2026, 11:59 PM EAT  
-**Assignment value:** 100 points  
-**Separate rubric:** Not supplied  
-**Owners:** Unassigned until confirmed by the group
+**Status date:** 9 November 2026. The deadline **23:59 EAT** was supplied by the
+user and is not stated in `docs/Project.pdf`. Verify the current local time and
+course submission availability before hand-off; no course submission is recorded.
 
-Status values: `Done`, `Needs review`, `Ready`, `Blocked`, `In progress`, and `Not started`.
+**Project value:** Not stated in the authoritative PDF.
 
-| ID | Task | Status | Owner | Dependency / evidence |
-|---|---|---|---|---|
-| 1 | Verify assignment brief and submission instructions; separate rubric not supplied | Done | Unassigned | `docs/Project.pdf` and requirements summary exist. |
-| 2 | Finalize Stage 1 proposal and record team review | Needs review | Unassigned | Team must review content; approvals must not be inferred. |
-| 3 | Source symptom knowledge; design representation; create Stage 2 facts and queries | Not started | Unassigned | Source register and provisional scope; no unsourced authoritative claims. |
-| 4 | Implement Stage 3 rules and inference queries | Not started | Unassigned | Stage 2 knowledge base. |
-| 5 | Demonstrate Stage 4 unification and backtracking | Not started | Unassigned | Stage 3 rules and multi-solution queries. |
-| 6 | Implement Stage 5 recursion and list processing | Not started | Unassigned | Stable symptom representation. |
-| 7 | Implement Stage 6 arithmetic, comparisons, and advanced rules | Not started | Unassigned | Explainable overlap design and candidate rules. |
-| 8 | Integrate and test Stage 7 console application | Not started | Unassigned | Stages 2–6; valid, invalid, boundary, and edge tests. |
-| 9 | Complete Stage 8 report, presentation, defense preparation, and video | Not started | Unassigned | Verified application and test evidence. |
-| 10 | Verify all deliverables, upload video, test permissions, and submit | Not started | Unassigned | Complete submission package and Google Drive link. |
+**Separate criterion-level rubric:** Not supplied.
 
-## Deadline-driven schedule
+**Team members and owners:** Not recorded; do not infer.
 
-### 4 November 2026
+| ID | Task / assignment stage | Status | Evidence / remaining action |
+|---|---|---|---|
+| 1 | Read the brief and establish requirements; recover/assess the Repomix handoff | Done | `docs/Project.pdf`, `docs/assignment-requirements.md`, and `docs/snapshot-assessment.md`; the 18-file archive was path-validated and compared with scaffold/PDF requirements. |
+| 2 | Stage 1 proposal, problem and scope | Needs human review | `docs/stage-1-proposal.md`; four conditions and console remain proposed, not approved. Confirm team details and scope. |
+| 3 | Stage 2 facts and retrieval queries | Implemented; review pending | `src/knowledge_base.pl`, `queries/demonstration_queries.pl`, `docs/source-register.md`; source pages checked 2026-11-09. |
+| 4 | Stage 3 rules and inference | Implemented; locally tested | `src/inference.pl`, query file, and PLUnit suites. |
+| 5 | Stage 4 unification/backtracking and Stage 5 recursion/lists | Implemented; locally tested | `findall/3` retrieval queries; recursive list processing; tests in `tests/`. |
+| 6 | Stage 6 arithmetic and advanced rules | Implemented; locally tested | Exact rational ranking, tie preservation, and narrowly justified negation-as-failure; no clinical threshold. |
+| 7 | Stage 7 integration and testing | Linux verified; Windows pending | Console, validation, CI runner, 64 declarations / 180 passing executions on Linux SWI-Prolog 10.0.2. Re-run with official 64-bit Windows installer. |
+| 8 | Stage 8 report and presentation | Report/deck prepared; video pending | `docs/final-report.md`, `presentation/project-presentation.pptx`, speaker notes, timed script. Record and upload the required video. |
+| 9 | Oral demonstration/defense | Preparation materials ready; human delivery pending | `presentation/oral-defense-notes.md`; no live presentation or recording is claimed. |
+| 10 | Final checks and submission | Pending | Confirm names/roles and scope, reverify Windows, record and upload video, test Drive permissions, submit to the course platform, and record confirmation. |
 
-- Review the Stage 1 proposal’s actual content.
-- Confirm member details and roles where possible.
-- Confirm the provisional scope and source-research plan.
-- Confirm SWI-Prolog availability on a team computer.
+## Known blockers and pending human actions
 
-### 5 November 2026
+1. Obtain team/lecturer review of the proposal, four-condition scope, source
+   mappings, and scoring design. No approval is recorded in this repository.
+2. Verify team member names, registration numbers, roles, and contributions from
+   the team's own records.
+3. Run the current integrated revision on Windows with the official 64-bit
+   SWI-Prolog installer and record actual Windows/interpreter output. The earlier
+   snapshot already ran on Windows (user-confirmed, preserved record), but that
+   does not cover this revision.
+4. Record the required project-explanation video, upload it to Google Drive,
+   test its sharing permissions, and add the actual link.
+5. Perform the final course submission and record confirmation.
 
-- Complete the sourced knowledge-representation design.
-- Develop Stage 2 facts and retrieval queries.
-- Develop Stage 3 inference rules.
-- Prepare Stage 4 unification and backtracking demonstrations.
+## Historic schedule note
 
-### 6 November 2026
-
-- Complete Stage 5 recursion and list processing.
-- Complete Stage 6 arithmetic, ranking, and appropriate advanced rules.
-- Review reasoning correctness and explainability.
-
-### 7 November 2026
-
-- Complete the integrated console application.
-- Validate empty, duplicate, unknown, malformed, and no-match inputs.
-- Execute and record tests.
-- Begin user and technical documentation.
-
-### 8 November 2026
-
-- Complete verification and regression testing.
-- Freeze features and correct defects rather than expanding scope.
-- Complete the report, traceability, slides, and demonstration script.
-- Rehearse the video and oral defense.
-
-### 9 November 2026
-
-- Perform a clean run using the exact submission source.
-- Verify names, registration numbers, references, and deliverables.
-- Record and upload the video to Google Drive and test sharing permissions.
-- Include the video link and submit with a contingency buffer before 11:59 PM EAT.
-
-## Critical path
-
-`Sourced knowledge → knowledge base → inference rules → integrated application → verified tests → report/video → submission`
-
-## Outstanding administrative information
-
-- Verified team-member names and registration numbers for repository import.
-- Team Lead and other role confirmations.
-- Lecturer confirmation of the proposed illness set and console interface.
-- Final overlap/coverage calculation design.
-- Report and presentation format preferences, if prescribed separately.
+The date-by-date plan from 4-9 November in the original scaffold is a planning
+artifact, not evidence that a task was performed. Current status is the table
+above; historical test records are indexed separately in
+[`historical-evidence-index.md`](historical-evidence-index.md).
