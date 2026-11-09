@@ -1,56 +1,64 @@
 # Test Plan and Results
 
-**Execution status:** No Prolog application tests have been executed. SWI-Prolog was unavailable in the scaffolding environment.
+**Current local test status:** 64 PLUnit declarations, 180 passing executions,
+0 failed, 0 timed out, 0 blocked, 0 fixme; runner exit 0 on Linux x86_64 with
+SWI-Prolog 10.0.2. The current revision has not been rerun on Windows. Exact
+commands and negative controls are in [`test-report.md`](test-report.md).
 
 ## 1. Testing principles
 
-- Test every major predicate with suitable examples.
-- Separate expected results from verified results.
-- Record the exact SWI-Prolog version, command, input, expected result, actual result, and pass/fail status.
-- Add regression coverage for corrected defects.
-- Do not use the repository-structure CI check as evidence of application correctness.
-- Use PLUnit for executable predicates where appropriate and demonstration queries for oral-defense evidence.
+- Distinguish source declarations from executions (including `forall/2`
+  executions).
+- Record the interpreter, platform, exact command, exit status, and commit for
+  each verification.
+- A passing test is evidence for its asserted software property only; it is not
+  evidence of medical validity.
+- Run destructive test mutations only in disposable copies, confirm the
+  mutation, and discard the copy.
+- GitHub Actions status is separate from a local CI-equivalent run.
 
-## 2. Planned test categories
+## 2. Coverage matrix
 
-| ID | Category | Example test purpose | Expected outcome | Actual result |
+| ID | Category | Required behavior | PLUnit evidence | Current result |
 |---|---|---|---|---|
-| KB-01 | Knowledge retrieval | Retrieve all declared conditions | Exactly the approved bounded condition set | Not run |
-| KB-02 | Knowledge retrieval | Retrieve associations for one condition | Only stored associations, without duplicates | Not run |
-| KB-03 | Shared relationships | Query conditions associated with a shared symptom | All and only matching conditions | Not run |
-| INF-01 | Inference | Derive candidates for a mixed symptom report | All eligible candidates; no premature first-result commit | Not run |
-| INF-02 | No match | Supply known terms with no eligible association | Explicit no-match result | Not run |
-| UB-01 | Unification | Inspect variable binding in a query | Bindings match the relevant terms | Not run |
-| UB-02 | Backtracking | Request alternative solutions | Alternatives appear in the expected logical order or documented ranking | Not run |
-| LIST-01 | Empty list | Supply `[]` | Validation response; no fabricated candidate | Not run |
-| LIST-02 | Duplicates | Repeat a symptom in the input | Duplicate handled according to the documented normalization rule | Not run |
-| LIST-03 | Unknown terms | Include a term outside the vocabulary | Unknown term reported separately | Not run |
-| LIST-04 | Malformed input | Supply an invalid term or malformed console input | Controlled validation message; no unexpected crash | Not run |
-| LIST-05 | Recursion | Process collections of different lengths | Base and recursive cases behave correctly | Not run |
-| ARITH-01 | Overlap | Calculate overlap for a known report | Count equals unique matched terms | Not run |
-| ARITH-02 | Boundary | Zero overlap | Candidate excluded and no-match behavior preserved | Not run |
-| ARITH-03 | Ranking | Two candidates with equal overlap | Both retained as tied | Not run |
-| ARITH-04 | Ordering | Candidates with different overlaps | Ordering follows the approved calculation | Not run |
-| IO-01 | Console interaction | Complete a normal console session | Clear prompts, results, explanation, and disclaimer | Not run |
-| IO-02 | Repeated sessions | Run more than one report | No unintended dynamic-fact leakage between sessions | Not run |
-| REG-01 | Requirements | Run the complete suite after integration | All applicable tests pass; failures documented honestly | Not run |
+| KB-01 | Knowledge retrieval | Four declared profiles and source metadata | `kb_integrity:four_conditions_declared`, source metadata tests | Pass in local run |
+| KB-02 | Fact integrity | Every relation refers to a declared condition, symptom, and source | `kb_integrity:all_facts_reference_declared_terms` | Pass in local run |
+| KB-03 | Qualifications | Preserve `usually_dry`, `sudden_onset`, `high`, `small_white`, `usually_low_grade` | `kb_integrity:*qualification*` and cough-alias tests | Pass in local run |
+| KB-04 | Duplicate feature | `cough` and `dry_cough` map to one feature; influenza has one cough fact | `kb_integrity:influenza_has_one_cough_feature_with_usually_dry` | Pass in local run |
+| INF-01 | Normalisation | Case, whitespace, phrases, aliases, malformed and unknown terms | `normalisation:*` | Pass in local run |
+| LIST-01 | Lists/recursion | Empty lists, stable first occurrence, duplicates counted | `list_processing:*`, `normalise_all` tests | Pass in local run |
+| SET-01 | Set relations | Intersection/difference deduplicate and preserve left order | `list_processing:overlap_*`, `difference_*` | Pass in local run |
+| ARITH-01 | Fraction | Condition-specific denominator; exact shared count | `scoring_and_inference:profile_denominator*`, `malaria_three_term_fraction` | Pass in local run |
+| ARITH-02 | Exact ranking | Cross multiplication, equivalent fractions, tied top group | `scoring_and_inference:*fraction*`, `*tie*` | Pass in local run |
+| INF-02 | No match | Zero-overlap results are not candidate matches | `scoring_and_inference:zero_overlap_is_not_an_eligible_candidate` | Pass in local run |
+| INF-03 | Unknown/unmatched | Unknown terms and per-list unmatched terms are distinct | `compare_all_*` tests | Pass in local run |
+| IO-01 | Empty/unknown | No false ranking, terms visible, disclaimer shown | `console_integration:empty_input*`, `unknown_only_input*` | Pass in local run |
+| IO-02 | Duplicate/tie | Duplicate aliases collapse; exact tie printed | `console_integration:duplicates_aliases*`, `tied_report*` | Pass in local run |
+| IO-03 | Invalid input | Improper/non-list report is rejected without exception | `console_integration:*input_is_rejected*` | Pass in local run |
+| SAFE-01 | Output boundary | No emergency or urgency instruction appears | `console_integration:no_emergency_or_urgency_instruction_is_printed` | Pass in local run |
+| DEMO-01 | Demonstration | Five demo cases defined; tie and messy input runnable | `console_integration:*demonstration*`, `*tied_demo*`, `*messy_demo*` | Pass in local run; commands also run directly |
 
-## 3. Execution record template
+## 3. CI and runner controls
 
-For each verified run, add:
+The workflow now loads application, query, and test source files and always runs
+`tests/run_tests.pl`. The runner fails when required test files cannot load, when
+there are no declarations/executions, or when reported test outcomes cannot be
+counted. In a disposable copy, controls must confirm:
 
-```text
-Date:
-SWI-Prolog version:
-Command:
-Input / query:
-Expected:
-Actual:
-Result: PASS / FAIL
-Commit:
-Notes:
-```
+1. Mutating the influenza cough qualification causes its regression test and
+   test command to fail.
+2. A missing required test file causes a load failure.
+3. Test files with all PLUnit suites removed cause the empty-suite guard to fail.
+4. Each control uses its own isolated copy; verify the untouched working-tree baseline independently.
 
-## 4. Final verification
+Observed control outputs and mutation checks are recorded in
+[`test-report.md`](test-report.md). The GitHub Actions run is recorded only if
+actually observed after push.
 
-Before submission, run the exact submitted source from a clean directory, record the results, and confirm that the report’s output matches the verified application behavior.
+## 4. Remaining platform and submission verification
+
+- Windows: not verified for this integrated revision; use the official 64-bit
+  SWI-Prolog installer and follow `windows-setup.md`.
+- Human oral defense: pending.
+- Google Drive recording/upload and permission check: pending.
+- Final assignment submission: pending.

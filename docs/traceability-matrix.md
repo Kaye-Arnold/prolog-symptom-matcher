@@ -1,37 +1,38 @@
 # Requirements Traceability Matrix
 
-This matrix maps assignment requirements to intended evidence. “Planned” is not completion. Update the evidence and status only when the artifact actually exists and its claims are supported.
+Statuses describe artifacts present in this branch and evidence actually observed.
+Implementation on a review branch is not formal team/lecturer approval. Test
+counts and environment are recorded in [`test-report.md`](test-report.md).
 
-| Requirement / deliverable | Planned or current evidence | Status |
+| Assignment requirement / deliverable | Artifact and evidence | Status / caveat |
 |---|---|---|
-| Problem statement, objectives, scope, knowledge, users, outputs, Prolog suitability | `docs/stage-1-proposal.md` | Draft present; needs team review |
-| Knowledge-representation design | `docs/knowledge-representation.md` | Preliminary; Stage 2 not complete |
-| External knowledge acknowledged | `docs/sources.md` and final report references | Source research not complete |
-| Meaningful facts and predicates | `src/knowledge_base.pl` | Planned; no facts encoded |
-| Retrieval queries | `queries/demonstration_queries.pl` | Planned; not executed |
-| Rules and logical inference | `src/inference.pl` and demonstration queries | Planned |
-| Unification and variable binding explanation | Stage 4 queries and `presentation/oral-defense-notes.md` | Planned |
-| Backtracking and multiple solutions | Stage 4 multi-solution queries and results | Planned |
-| Meaningful recursion | Recursive list predicates in application source and tests | Planned |
-| List processing | Reported, matched, unmatched, and unknown symptom lists | Planned |
-| Arithmetic and comparisons | Transparent overlap calculations and ranking | Planned; formula requires review |
-| Negation as failure or cut where appropriate | Narrowly justified advanced rule, if needed | Not mandatory to use both; not implemented |
-| Knowledge-based reasoning | Candidate derivation from facts, rules, and reports | Planned |
-| Input and output | `src/interface.pl` | Proposed console interface; not implemented |
-| Invalid and edge-case handling | Validation predicates and test suite | Planned |
-| Major predicates tested | `tests/` and recorded commands/results | Not started; no execution claimed |
-| Integrated application | `src/symptom_matcher.pl` and supporting modules | Planned |
-| Technical documentation | Relevant documents under `docs/` | Structure present; technical content incomplete |
-| User instructions | `docs/user-guide.md` | Awaits implementation |
-| Final report | `docs/final-report.md` | Outline only |
-| Presentation and feature demonstration | `presentation/` | Planning materials only |
-| Test cases and results | `docs/test-plan.md` plus executed results section | Plan present; no results yet |
-| Limitations and future improvements | Proposal and final report | Initial limitations present; final evaluation pending |
-| Oral defense | `presentation/oral-defense-notes.md` | Preparation required |
-| Google Drive video link | Submission record in `docs/final-report.md` | Not recorded or uploaded |
-| Team details and roles | Proposal and final submission | Outstanding verified details |
-| Submission by deadline | Final repository and submission confirmation | Not submitted |
+| Repomix recovery and assessment against scaffold/PDF | `docs/snapshot-assessment.md`; historical evidence index | 18-file snapshot path-validated in a new temporary directory; PDF/scaffold comparison and excluded unsafe behavior recorded. Snapshot and temp files are not committed. |
+| Stage 1: problem, objectives, scope, required knowledge, users, outputs, Prolog suitability | `docs/stage-1-proposal.md` | Draft present; team/scope review pending. |
+| Stage 2: entities, predicates, facts, knowledge base | `src/knowledge_base.pl`; `docs/knowledge-representation.md` | Implemented with source-linked facts; scope approval pending. |
+| Stage 2: working retrieval queries | `queries/demonstration_queries.pl` | Executed locally with SWI-Prolog 10.0.2; see test report. |
+| External sources acknowledged | `docs/sources.md`, `docs/source-register.md`, `source/5` | Four official pages retrieved and checked on 2026-11-09; mappings and limits recorded. |
+| Stage 3: rules and inference from facts | `src/inference.pl`; tests | Implemented and tested locally; not clinical inference. |
+| Stage 4: unification and multiple solutions/backtracking | `queries/demonstration_queries.pl`; `list_conditions/1`, `conditions_for_symptom/2` | Executed query examples; `findall/3` collects alternative unifications. |
+| Stage 5: recursion and list operations | `normalise_all/2`, `dedupe_acc/3`, `count_occurrences/3`, set operations | Implemented and covered by PLUnit tests. |
+| Stage 6: arithmetic and comparison | `coverage_fraction/3`, `ranking/2`, `by_score/3` | Exact cross-multiplication; no floating-point ranking and no medical interpretation. |
+| Stage 6: negation as failure or cut where appropriate | `unknown_terms/2`; CLI argument parser | NAF is limited to finite-vocabulary membership; cut only commits explicit CLI form. |
+| Stage 7: validation and interaction | `src/interface.pl` | Console, empty/unknown/no-match/invalid API input behavior, duplicates, ties, disclaimer. |
+| Stage 7: integration and major-predicate tests | `tests/test_knowledge_base.pl`, `tests/test_inference.pl`, `tests/test_integration.pl` | Linux SWI-Prolog 10.0.2: 64 declarations, 180 passing executions, zero failed/timeouts/blocked/fixme, exit 0. Windows not reverified. |
+| CI executes tests and rejects empty suite | `.github/workflows/prolog-checks.yml`, `tests/run_tests.pl` | CI unconditionally runs positive-evidence runner; local mutation, missing-suite, and empty-suite controls are recorded in test report. GitHub Actions result is reported separately. |
+| Stage 8: complete final report | `docs/final-report.md` | Substantive report included; no word count or report format is stated in the PDF. |
+| Stage 8: presentation deliverable | `presentation/project-presentation.pptx`; outline and notes | PPTX generated and structurally validated; no live presentation is claimed. |
+| Feature demonstration and timed script | `presentation/demonstration-script.md` | Real commands/observed Linux snippets and recording instructions included. No recording exists. |
+| Test cases and results | `docs/test-plan.md`, `docs/test-report.md` | Current run and negative controls recorded. Historical snapshot reports are labelled and separated. |
+| Technical documentation and user instructions | `docs/knowledge-representation.md`, `docs/implementation-notes.md`, `docs/user-guide.md`, `docs/windows-setup.md` | Present and aligned to current code. |
+| Limitations and future improvements | `docs/limitations.md`, report | Bounded scope, no clinical validity, no advice outputs, and platform gaps documented. |
+| Oral defense | `presentation/oral-defense-notes.md` | Slide-by-slide notes and preparation prompts provided; human defense pending. |
+| Google Drive video link | `presentation/demonstration-script.md`, submission checklist | **Pending:** no recording, upload, permissions check, or link is claimed. |
+| Team details, roles, approval | Proposal and task board | **Pending human confirmation**; not inferred from commit identity. |
+| Final course submission | Task board/checklist | **Pending**; no submission confirmation is recorded. |
 
 ## Evidence-quality rule
 
-A link, placeholder, task-board status, successful repository-structure check, or expected result is not evidence that an application requirement works. Completion requires the actual artifact and appropriate verification.
+A planned artifact, a successful structure check, a historical record, or a
+zero-test process exit is not proof of current application behavior. The report
+identifies exact current commands, interpreter, platform, source commit, observed
+results, and unverified work separately.

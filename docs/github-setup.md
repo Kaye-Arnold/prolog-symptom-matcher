@@ -1,82 +1,49 @@
-# GitHub Setup and Enforcement
+# GitHub Repository and Review Workflow
 
-The local repository contains the project scaffold and Git history. A private GitHub remote still needs to be created by an authenticated repository owner.
+## Observed repository state
 
-## 1. Create the remote repository
+Checked with GitHub CLI on 9 November 2026:
 
-Use these values:
+- Repository: <https://github.com/Kaye-Arnold/prolog-symptom-matcher>
+- Default branch: `main`.
+- Visibility: public.
+- Issues enabled.
+- The scaffold's earlier instructions to create a new private repository are
+  obsolete; this repository and `origin` already exist.
+- An assignment-completion issue is tracked as
+  [#1](https://github.com/Kaye-Arnold/prolog-symptom-matcher/issues/1).
 
-- **Name:** `prolog-symptom-matcher`
-- **Description:** `Educational SWI-Prolog knowledge-based system for transparent symptom matching across selected infectious illnesses, with queries, tests, and documentation.`
-- **Visibility:** Private
-- **Default branch:** `main`
-- **License:** None while private coursework
-- **Issues:** Enabled
-- **Projects:** Enabled
+Branch protection settings were not changed or inferred. The repository's
+`main` branch must only be updated by a reviewed pull request. Never force-push,
+rewrite history, or merge a PR without the required human review.
 
-Because the local repository already contains a README and initial commit, do not initialize the GitHub remote with another README, `.gitignore`, or license.
+## Branch and pull-request workflow
 
-### Option A: GitHub web interface
+1. Link substantial work to a scoped issue.
+2. Use a feature branch and keep commits focused. In managed sessions, follow
+   the branch supplied by the coding environment rather than renaming it.
+3. Open a pull request against `main`; describe changes, exact verification,
+   pending Windows/video/review work, and risks.
+4. Obtain the agreed team review before merge. No merge is performed by this
+   workflow.
+5. Never include tokens, `.env` values, passwords, or unnecessary personal data.
 
-Create the empty private repository, then run from the local repository root:
+## Continuous integration
 
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/prolog-symptom-matcher.git
-git push -u origin main
-```
+`.github/workflows/prolog-checks.yml` checks repository structure, installs
+SWI-Prolog on Ubuntu, loads application/query/test source files, and always runs
+`tests/run_tests.pl`. The runner requires positive evidence of test declarations
+and executions; an empty suite is a failure. A successful GitHub Actions result
+would establish only that those checks passed on the runner image, not Windows
+compatibility or medical validity.
 
-Replace `YOUR-USERNAME` with the actual owner or organization.
+Local CI-equivalent commands are recorded in `docs/test-report.md`. GitHub
+Actions status is reported separately from local test output.
 
-### Option B: Authenticated GitHub CLI
+## Open human/external actions
 
-```bash
-gh repo create prolog-symptom-matcher \
-  --private \
-  --description "Educational SWI-Prolog knowledge-based system for transparent symptom matching across selected infectious illnesses, with queries, tests, and documentation." \
-  --source=. \
-  --remote=origin \
-  --push
-```
-
-## 2. Apply branch protection
-
-In **Settings → Branches**, protect `main` and enable:
-
-1. Require a pull request before merging.
-2. Require at least one approval.
-3. Dismiss stale approvals when new commits are pushed.
-4. Require branches to be up to date before merging.
-5. Require the `Prolog Checks / check` status check after the workflow has run at least once.
-6. Block force pushes.
-7. Do not allow branch deletion.
-8. Apply the rules to administrators where the team’s GitHub plan permits it.
-
-Do not add a `CODEOWNERS` entry until verified GitHub usernames are available.
-
-## 3. Connect Claude safely
-
-1. Authorize only this repository, not every repository owned by the account.
-2. Ensure the integration reads `CLAUDE.md`.
-3. Require feature branches and pull requests; do not allow direct commits to `main`.
-4. Grant only the permissions needed for the intended workflow.
-5. Never paste GitHub tokens, Slack tokens, passwords, or `.env` values into Slack, issues, commits, or pull requests.
-6. Have a teammate review every generated change before merging.
-
-Initial Claude instruction:
-
-```text
-Work only in prolog-symptom-matcher. Read CLAUDE.md and the documents under docs/ before proposing changes. Summarize the current stage, approved facts, pending decisions, and missing prerequisites. Do not implement code or claim approvals. Create a branch and pull request for any approved change; never commit directly to main.
-```
-
-## 4. Required content reconciliation
-
-The actual revised Slack Canvas text and recorded team-member details were not available when this local scaffold was created. Before treating the repository proposal as the team’s approved copy:
-
-1. Compare `docs/stage-1-proposal.md` with the revised Slack Canvas.
-2. Import only verified team details and role agreements.
-3. Resolve any content difference deliberately; do not silently overwrite one version.
-4. Record team approval only after it actually occurs.
-
-## 5. CI interpretation
-
-The included workflow checks repository structure and whether Prolog files load. It runs PLUnit only when real test suites are defined. A successful scaffold check is not evidence of complete functionality, medical validity, or executed application tests.
+- Team/lecturer review of the proposed scope, source mappings, and scoring rule.
+- Windows re-verification with the official 64-bit SWI-Prolog installer.
+- Record the required project video, upload to Google Drive, test link access,
+  and insert the actual URL.
+- Perform and record the final assignment submission.

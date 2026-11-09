@@ -8,10 +8,11 @@ Before changing the project, read:
 
 1. `docs/Project.pdf` — authoritative assignment brief supplied by the lecturer.
 2. `docs/assignment-requirements.md` — navigable requirements summary; the PDF controls if there is a conflict.
-3. `docs/stage-1-proposal.md` — current proposal, still subject to team review.
-4. `docs/task-board.md` — current status, dependencies, and schedule.
-5. `docs/sources.md` — source register for medical knowledge.
-6. `docs/traceability-matrix.md` — requirement-to-evidence mapping.
+3. `docs/snapshot-assessment.md` — recovered snapshot, scaffold/PDF comparison, and historical evidence limits.
+4. `docs/stage-1-proposal.md` — current proposal, still subject to team review.
+5. `docs/task-board.md` — current status, dependencies, and schedule.
+6. `docs/sources.md` — source register for medical knowledge.
+7. `docs/traceability-matrix.md` — requirement-to-evidence mapping.
 
 Do not invent requirements, approvals, team details, test results, contributions, references, or a marking rubric.
 
@@ -19,11 +20,11 @@ Do not invent requirements, approvals, team details, test results, contributions
 
 - **Title:** Knowledge-Based Symptom-Matching System for Selected Infectious Illnesses — Educational Prototype.
 - **Language:** SWI-Prolog.
-- **Interface:** Proposed console application.
-- **Proposed illnesses:** malaria, influenza, common cold, and measles.
-- **Deadline:** 9 November 2026 at 11:59 PM EAT (Africa/Kampala).
-- **Assignment value:** 100 points; no criterion-level rubric has been supplied.
-- **Current stage:** Stage 1 needs team review; implementation has not been approved or completed.
+- **Interface:** Console application implemented for review; formal team/lecturer approval is not recorded.
+- **Proposed illnesses:** malaria, influenza, common cold, and measles; scope approval remains pending.
+- **Deadline:** User-provided as 9 November 2026 at 23:59 EAT (Africa/Kampala); not stated in `docs/Project.pdf`.
+- **Assignment value:** Not stated in the PDF; a prior scaffold claim of 100 points is unsupported. No separate criterion-level rubric was supplied.
+- **Current stage:** Stages 2-7 have an implementation and Linux evidence in this branch. The Stage 1 proposal and scope still need human review; Stage 8 artifacts exist, while Windows re-verification and the Google Drive video remain pending.
 
 Do not change the title, scope, illness set, deadline, interface, or approval status without explicit team confirmation recorded in the relevant documentation.
 
@@ -91,7 +92,7 @@ Never claim code or tests were executed unless they were actually executed in th
 - Do not treat a planned file, placeholder, status update, or keyword check as a completed application feature.
 - Keep Stage 1 as **Needs review** until the team explicitly approves the proposal content.
 - Do not encode unsourced condition–symptom relationships as authoritative knowledge.
-- Do not begin broad redesigns when a targeted correction is sufficient.
+- Do not treat the review-branch implementation as team or lecturer approval. Do not expand or represent the proposed scope as approved until approval is recorded.
 
 ## 7. Definition of done
 

@@ -24,12 +24,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes swi-prolog
 
-      - name: Check that Prolog files load
+      - name: Check application, query, and test files load
         run: |
           shopt -s nullglob
-          files=(src/*.pl queries/*.pl tests/*.pl)
+          files=(src/*.pl queries/*.pl tests/test_*.pl)
           if ((${#files[@]} == 0)); then
-            echo "No Prolog files found."
+            echo "No application, query, or test Prolog files found."
             exit 1
           fi
           for file in "${files[@]}"; do
@@ -37,11 +37,5 @@ jobs:
             swipl -q -g "load_files(['$file']), halt"
           done
 
-      - name: Run PLUnit suites when defined
-        run: |
-          if grep -Rqs --include='*.pl' -E ':-[[:space:]]*begin_tests' tests; then
-            test -f tests/run_tests.pl
-            swipl -q -g run_tests -t halt tests/run_tests.pl
-          else
-            echo "No PLUnit suites defined yet; proposal-stage scaffold only."
-          fi
+      - name: Run PLUnit suites and require positive execution evidence
+        run: swipl -q -s tests/run_tests.pl

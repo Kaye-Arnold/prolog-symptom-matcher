@@ -1,66 +1,121 @@
 # Knowledge-Representation Design
 
-**Status:** Preliminary design for Stage 2; no medical facts have been encoded or verified.
+**Status:** Implemented on the review branch; the four-condition scope remains
+proposed and has not been recorded as formally approved.
 
-## 1. Entities
+## 1. Entities and representation
 
-- **Condition:** One of the four proposed illness identifiers, subject to scope confirmation.
-- **Symptom term:** A canonical atom in a bounded educational vocabulary.
-- **Condition–symptom association:** A limited relationship supported by the source register.
-- **Source:** A documented external reference and the relationships it supports.
-- **Symptom report:** A user-supplied collection after validation and duplicate handling.
-- **Candidate result:** A condition with non-zero overlap under the application rule, together with its explanation.
+- **Condition:** one of `malaria`, `influenza`, `measles`, or `common_cold`.
+- **Canonical symptom:** one atom in a deliberately limited vocabulary.
+- **Alias:** a typed synonym mapped to exactly one canonical symptom, e.g.
+  `dry_cough -> cough`.
+- **Condition-symptom association:** a limited source-linked fact plus a
+  qualification and source ID.
+- **Source:** a public-health page with title, organisation, URL, and page date.
+- **Report:** a list of raw terms, normalized to known canonical features,
+  deduplicated, and accompanied by separate unknown and duplicate lists.
+- **Result:** `result(Condition, frac(Shared, Listed), Matched, Unmatched)`.
+  `Unmatched` contains recognised report terms not listed for that result.
 
-## 2. Representation principles
+All facts and rule code are in `src/`. The detailed source-to-fact mapping is in
+[`source-register.md`](source-register.md).
 
-1. Use valid, consistent Prolog atoms for identifiers.
-2. Separate vocabulary facts from condition associations and source metadata.
-3. Do not encode associations as necessary, sufficient, or definitive by default.
-4. Preserve source provenance and educational simplifications.
-5. Normalize duplicate reported terms before counting overlap.
-6. Distinguish unknown terms from known terms absent from a particular condition profile.
-7. Do not silently discard tied candidates.
-8. Keep application scoring separate from medical meaning.
+## 2. Implemented predicate catalogue
 
-## 3. Proposed predicate catalogue
-
-These predicates are a design proposal, not implemented functionality.
-
-| Predicate | Status | Intended meaning |
+| Predicate | File | Meaning |
 |---|---|---|
-| `condition/1` | Planned | Declares a condition in the bounded scope. |
-| `symptom/1` | Planned | Declares a canonical term in the application vocabulary. |
-| `condition_symptom/2` | Planned | Represents a sourced educational association. |
-| `association_source/3` | Planned | Links an association or grouped knowledge entry to its source record. |
-| `reported_symptoms/2` | Planned | Represents or derives a normalized report for a query/session. |
-| `known_symptom/1` | Planned | Checks membership in the controlled vocabulary. |
-| `candidate/2` | Planned | Derives a condition with non-zero overlap for a report. |
-| `matched_symptoms/3` | Planned | Derives the intersection between a report and a condition profile. |
-| `unmatched_for_condition/3` | Planned | Derives known reported terms absent from a candidate profile. |
-| `unknown_symptoms/2` | Planned | Derives reported terms outside the controlled vocabulary. |
-| `overlap_count/3` | Planned | Calculates the number of unique matched terms. |
-| `ranked_matches/2` | Planned | Collects and orders all eligible candidates while retaining ties. |
-| `validate_report/2` | Planned | Validates input and produces a normalized report or explanatory error. |
+| `condition/1`, `condition_name/2` | `src/knowledge_base.pl` | Declares each bounded condition and display name. |
+| `symptom/1`, `symptom_alias/2` | `src/knowledge_base.pl` | Canonical vocabulary and aliases. |
+| `condition_symptom/4` | `src/knowledge_base.pl` | `condition_symptom(Condition, Symptom, Qualification, SourceId)`. |
+| `source/5`, `source_date/2`, `source_url/2` | `src/knowledge_base.pl` | Machine-readable source metadata. |
+| `normalise/2`, `normalise_all/2` | `src/inference.pl` | Converts typed terms to canonical atoms; processes a list recursively. |
+| `unknown_terms/2` | `src/inference.pl` | Returns normalised, deduplicated terms not in the vocabulary. |
+| `dedupe/2`, `dedupe_report/3` | `src/inference.pl` | First-seen list deduplication and extra-occurrence counts. |
+| `symptoms_of/2` | `src/inference.pl` | Retrieves a condition's unique listed features. |
+| `overlap/3`, `difference/3` | `src/inference.pl` | Set intersection and difference over lists. |
+| `coverage_fraction/3` | `src/inference.pl` | Calculates exact `frac(N,D)` for one condition. |
+| `compare_all/3` | `src/inference.pl` | Produces a result for every condition and a separate unknown list. |
+| `candidate_matches/3` | `src/inference.pl` | Keeps only positive software matches; zero overlap is not a candidate. |
+| `ranking/2`, `tied_top/2` | `src/inference.pl` | Groups eligible matches by exact ratio and returns all top ties. |
+| Retrieval helpers and `run_query_examples/0` | `queries/demonstration_queries.pl` | Runnable examples for unification, backtracking, source facts, and ranking. |
 
-Names and arities must be reviewed against the final input model before coding. Avoid adding a predicate merely to satisfy a keyword checklist.
+## 3. Source qualifications and cough identity
 
-## 4. Transparent overlap design
+The qualification remains attached to its source fact. Regression tests check
+`usually_dry`, `sudden_onset`, `usually_low_grade`, `high`, and `small_white`.
+For influenza there is one fact:
 
-For a normalized report `R` and condition `C`:
+```prolog
+condition_symptom(influenza, cough, usually_dry, who_influenza).
+```
 
-- `Matched(C,R)` is the intersection of unique known reported terms and the condition’s stored associations.
-- `Overlap(C,R)` is the number of terms in `Matched(C,R)`.
-- A candidate is eligible when `Overlap(C,R) > 0` under the proposed application rule.
-- `Unknown(R)` contains reported terms outside the controlled vocabulary.
-- `Unmatched(C,R)` contains known reported terms not associated with `C`.
+`dry_cough` is an alias for `cough`; it is not an additional canonical feature
+or fact. Consequently, entering both `cough` and `dry cough` produces one
+canonical cough in the report and one influenza denominator item.
 
-An optional coverage measure may be considered only after its denominator and interpretation are documented. Neither overlap nor coverage is a probability, diagnosis, severity score, or urgency measure.
+The logic stores qualifiers but does not reason over the user's age, measured
+temperature, onset, duration, or clinical history. The words therefore remain
+source metadata, not an assessment of the user's condition.
 
-## 5. Required Stage 2 evidence
+## 4. Queries, unification, and backtracking
 
-- Completed and reviewed predicate catalogue.
-- Source-backed fact set with no duplicate or contradictory entries.
-- Queries for all conditions, condition symptoms, conditions sharing a symptom, shared symptoms, and vocabulary lookup.
-- Expected query results clearly labelled until executed.
-- Actual SWI-Prolog commands and outputs after execution.
-- Updated source register and traceability matrix.
+The query file is executable. For example:
+
+```prolog
+findall(Condition,
+        condition_symptom(Condition, cough, _, _),
+        Conditions).
+```
+
+The variable `Condition` unifies successively with every matching fact; `findall/3`
+collects alternatives explored through backtracking. The input alias query
+`conditions_for_symptom("dry cough", Conditions)` first normalises to `cough`,
+then backtracks across each matching association. These are retrieval operations,
+not predictions.
+
+Run the query examples from the repository root:
+
+```sh
+swipl -q -s queries/demonstration_queries.pl \
+  -g demonstration_queries:run_query_examples -t halt
+```
+
+## 5. Lists, recursion, validation, and negation
+
+Reports, profiles, matches, unmatched terms, duplicates, and unknowns are lists.
+`normalise_all/2`, the accumulator-based `dedupe_acc/3`, occurrence counting,
+set operations, and the console word wrapper have recursive base and recursive
+cases with practical list-processing work. A malformed non-list passed to the
+console report is rejected with a message; unsupported list items do not throw
+an exception and are reported as unknown.
+
+Negation as failure (`\+ normalise(Term, _)`) is used narrowly to classify an
+input term as not in this application's finite vocabulary. It is not used to
+infer that a person does not have a condition. A cut in the interactive command
+parser commits after selecting the `--demo=...` argument form; it is not used to
+remove alternative condition matches.
+
+## 6. Software overlap and exact tie behavior
+
+For unique normalised report set `R` and condition feature set `S`:
+
+- `Matched = R intersect S`.
+- `Unmatched = R minus S`, for recognised terms only.
+- `N = length(Matched)`.
+- `D = length(S)`.
+- The displayed software fraction is `N/D`.
+- A result is eligible only when `N > 0`.
+
+Fractions are ordered by cross multiplication (`N1*D2` versus `N2*D1`), not
+floating point. Equal ratios are grouped and retained as ties. For the
+`tied_example` input `[fever, cough, runny nose, nasal congestion]`, measles is
+`3/6` and common cold is `4/8`; both are reported in one top tie. The fraction is
+only a transparent programming rule and is not a probability, diagnosis,
+severity, or urgency measure.
+
+## 7. Scope and provenance boundary
+
+The sources list symptoms; they do not provide the ranking rule. The fact base is
+small, source-specific, and incomplete. No unsupported thresholds, diagnostic
+rules, triage logic, or clinical advice are encoded. The scope and source mapping
+remain subject to team/lecturer review.
