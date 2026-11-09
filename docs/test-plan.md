@@ -40,10 +40,18 @@ commands and negative controls are in [`test-report.md`](test-report.md).
 
 ## 3. CI and runner controls
 
-The workflow now loads application, query, and test source files and always runs
-`tests/run_tests.pl`. The runner fails when required test files cannot load, when
-there are no declarations/executions, or when reported test outcomes cannot be
-counted. In a disposable copy, controls must confirm:
+The repository's workflow (`.github/workflows/prolog-checks.yml`) is the
+scaffold version: it checks structure, loads application/query/test sources, and
+runs `tests/run_tests.pl` when `begin_tests` declarations are present in
+`tests/`. The runner executes during file initialization and calls `halt(0)` or
+`halt(1)` itself, so a failing suite fails the step.
+
+Known gap: if every suite were removed from `tests/`, the scaffold step would
+print a "proposal-stage scaffold only" message and pass. A hardened workflow
+that invokes the runner unconditionally is written but could not be pushed,
+because the connected GitHub App lacks `workflows` permission. Re-apply it once
+that permission is granted; until then, do not describe CI as rejecting an empty
+suite. In a disposable copy, runner controls must confirm:
 
 1. Mutating the influenza cough qualification causes its regression test and
    test command to fail.

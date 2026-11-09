@@ -93,8 +93,11 @@ The PLUnit suites cover:
 - zero-overlap filtering, top ties, demo cases, and selected output boundaries.
 
 `tests/run_tests.pl` requires a non-empty suite and verifies declaration and
-execution counts as well as failed, timeout, blocked, and fixme fields. The CI
-workflow always invokes it; an empty suite is not treated as a passing scaffold.
+execution counts as well as failed, timeout, blocked, and fixme fields. The
+repository workflow invokes it when suites are declared and the runner halts
+nonzero on failure. A hardened workflow step that calls the runner
+unconditionally is prepared but not pushed: the connected GitHub App lacks
+`workflows` permission. See `test-plan.md` for the resulting CI gap.
 
 ## 4. Known limitations
 

@@ -111,8 +111,22 @@ record cannot be independently re-inspected here. See
 **No Windows execution of the current revision has occurred.** The official
 64-bit Windows installer remains the target for re-verifying the integrated
 code. The current `.bat` launchers were checked for ASCII and CRLF formatting on
-Linux; that is file-format evidence, not a current Windows run. GitHub Actions
-status is not inferred here.
+Linux; that is file-format evidence, not a current Windows run.
+
+## Continuous integration state
+
+The committed workflow is the scaffold version: structure check, SWI-Prolog
+install and source loads, then `tests/run_tests.pl` executed only when
+`begin_tests` declarations exist. Because the runner halts nonzero itself, a
+failing suite fails the job. Removing every suite would let that step skip and
+pass — the documented gap.
+
+A hardened step calling `swipl -q -s tests/run_tests.pl` unconditionally was
+written and validated locally, but could not be pushed: the connected GitHub App
+lacks `workflows` permission and GitHub rejects any ref update touching
+`.github/workflows/prolog-checks.yml`. The repository workflow therefore remains
+unchanged from the scaffold, and the hardening is recorded as pending rather
+than as delivered. GitHub Actions results are recorded only from observed runs.
 
 ## Remaining validation
 

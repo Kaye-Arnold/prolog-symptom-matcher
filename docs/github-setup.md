@@ -30,12 +30,19 @@ rewrite history, or merge a PR without the required human review.
 
 ## Continuous integration
 
-`.github/workflows/prolog-checks.yml` checks repository structure, installs
-SWI-Prolog on Ubuntu, loads application/query/test source files, and always runs
-`tests/run_tests.pl`. The runner requires positive evidence of test declarations
-and executions; an empty suite is a failure. A successful GitHub Actions result
-would establish only that those checks passed on the runner image, not Windows
-compatibility or medical validity.
+`.github/workflows/prolog-checks.yml` is the scaffold version: it checks
+repository structure, installs SWI-Prolog on Ubuntu, loads application/query/test
+source files, and runs `tests/run_tests.pl` when suites are declared. The runner
+requires positive evidence of test declarations and executions and halts nonzero
+otherwise, so a failing suite fails the job. The remaining gap is that removing
+all suites would let the scaffold step skip and pass.
+
+A hardened step that runs the runner unconditionally is written and locally
+validated, but it could not be pushed: the connected GitHub App lacks the
+`workflows` permission, so GitHub refuses any ref update touching that file.
+Apply it after the app is granted that permission. A successful GitHub Actions
+result would establish only that the recorded checks passed on the runner image,
+not Windows compatibility or medical validity.
 
 Local CI-equivalent commands are recorded in `docs/test-report.md`. GitHub
 Actions status is reported separately from local test output.
