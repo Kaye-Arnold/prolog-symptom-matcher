@@ -98,15 +98,16 @@ RESULT: PASS - 64 declarations, 180 passing executions; 0 failed, 0 timed out, 0
 
 **Say:** "The runner reports declarations separately from executions because
 `forall/2` can execute one declaration for several conditions. This is a local
-Linux result; the current revision still needs a Windows run."
+Linux result; the earlier snapshot ran on Windows, but this revision still needs
+a Windows run."
 
 ### 3:20-4:00 — Close with limitations and pending work
 
 **Say:** "The profiles are incomplete, the sources do not define the ranking
 rule, and the stored qualifiers are not interpreted against age, duration,
 measurements, or other history. The branch needs team/lecturer review. Windows
-re-verification, the oral defense, the required Google Drive video, and final
-submission are still pending."
+re-verification of this revision, the oral defense, the required Google Drive
+video, and final submission are still pending."
 
 **Show:** the report's limitations and the submission checklist. End without
 making a health recommendation.

@@ -74,16 +74,27 @@ The four-condition domain and console remain proposed pending human review.
 
 ## 4. Historical claims and evidence limits
 
-The snapshot's README and reports make claims about SWI-Prolog 9.2.9 on Linux and
-10.0.2 on Windows, prior defect fixes, console runs, and Windows batch launchers.
+The user confirms that the code represented by the Repomix snapshot was run
+locally on an actual Windows machine before this integration. The preserved
+historical test report describes SWI-Prolog 10.0.2 on Windows, with 57 test
+declarations and 179 passing executions, and records demo, interactive, and
+batch-launcher runs. This is historical Windows execution for the earlier
+root-level snapshot, not for the current `src/` implementation.
+
 The linked raw Linux logs and `win-tests.txt` are absent from the recovered tree;
-Git history is also absent. The detailed snapshot documents are preserved
-byte-for-byte as `docs/historical-test-report.md`, `docs/windows-run-record.md`,
-and `docs/diagnose-windows.md`, indexed with hashes in
-[`historical-evidence-index.md`](historical-evidence-index.md). Those are
-owner-supplied historical records, not independently observed current Windows
-results. The independently rerun historic suite on Linux is recorded separately
-in the evidence index and is not conflated with the current integrated suite.
+Git history is also absent. The preserved report also contradicts itself in
+places: earlier status text says the suite had not run on Windows, while later
+sections record the resolved result (an exit-1 invocation caused by a mangled
+filename, then a clean `RESULT: PASS`, exit 0, with 57 declarations and 179
+passing executions). The user's confirmation that the snapshot codebase ran on a
+real Windows machine matches the later sections. Thus the historical record is
+preserved, and the user-confirmed fact of local Windows execution is
+acknowledged, but the raw Windows transcript cannot be independently
+re-inspected here. The detailed snapshot documents are preserved byte-for-byte as
+`docs/historical-test-report.md`, `docs/windows-run-record.md`, and
+`docs/diagnose-windows.md`, indexed with hashes in
+[`historical-evidence-index.md`](historical-evidence-index.md). The separately
+rerun historic Linux suite is not conflated with the current integrated suite.
 
 The old README also contains scope and medical-safety choices that are not
 requirements merely because they appear in the snapshot. In particular, the

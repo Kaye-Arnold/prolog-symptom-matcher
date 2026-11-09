@@ -84,8 +84,9 @@ blocked tests, or fixme tests. See [`test-report.md`](test-report.md) for actual
 local evidence and [`test-plan.md`](test-plan.md) for coverage.
 
 If `swipl` is not recognised, install SWI-Prolog and open a new shell so PATH is
-refreshed. Run commands from the project root. Current Windows verification is
-pending; a Linux run is not evidence of a Windows run.
+refreshed. Run commands from the project root. Verification of the current
+revision on Windows is pending; the earlier snapshot's Windows run is historical
+evidence only, and a Linux run is not evidence of a Windows run.
 
 ## 6. Safety and scope
 

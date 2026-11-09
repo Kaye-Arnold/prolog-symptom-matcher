@@ -18,8 +18,10 @@ explains the resulting list overlaps.
   180 passing executions, 0 failures/timeouts/blocked/fixme, exit 0**. The exact
   platform, command, controls, and commit are recorded in
   [`docs/test-report.md`](docs/test-report.md).
-- **Windows verification of this integrated revision is pending.** Historical
-  owner-supplied Windows records apply to earlier snapshot code only; see
+- **Historical Windows execution exists for the earlier snapshot.** The user
+  confirms that the Repomix snapshot codebase was run locally on an actual
+  Windows machine (SWI-Prolog 10.0.2); the preserved record documents that run.
+  It does not cover this integrated revision. See
   [`docs/historical-evidence-index.md`](docs/historical-evidence-index.md).
 - Stage 8 report and PowerPoint presentation are included. A recording, Google
   Drive upload/link, sharing-permission check, team review, and final assignment

@@ -24,7 +24,8 @@ review and the required video remain pending.
 9. **Verification evidence** — SWI-Prolog 10.0.2 on Linux x86_64; 64 test
    declarations and 180 passing executions; control tests and limitations.
 10. **Limitations, references, and remaining actions** — report/deck links,
-    Windows re-verification, formal review, video upload, and oral defense.
+    Windows re-verification of this revision, formal review, video upload, and
+    oral defense.
 
 ## Speaker notes
 

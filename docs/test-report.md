@@ -98,21 +98,30 @@ failure modes. They do not establish that every possible defect is detected.
 ## Historical and platform boundaries
 
 A separately preserved snapshot test report records 57 declarations and 179
-passing executions on Linux SWI-Prolog 10.0.2. It is historical, predates the
-integrated application, and must not be conflated with the current run.
+passing executions on Linux SWI-Prolog 10.0.2. The user confirms that the
+Repomix snapshot codebase was also run locally on an actual Windows machine;
+the preserved historical report records a Windows SWI-Prolog 10.0.2 run with
+57 declarations and 179 passing executions. This is historical evidence for the
+older root-level snapshot, not the current integrated revision. The raw
+`win-tests.txt` output is absent from the recovered archive, so the narrative
+record cannot be independently re-inspected here. See
+[`snapshot-assessment.md`](snapshot-assessment.md) and
+[`historical-evidence-index.md`](historical-evidence-index.md).
 
 **No Windows execution of the current revision has occurred.** The official
-64-bit Windows installer is the target environment. The `.bat` launchers were
-checked for ASCII and CRLF formatting on Linux, which is file-format evidence,
-not evidence they run in Windows. GitHub Actions status is not inferred here.
+64-bit Windows installer remains the target for re-verifying the integrated
+code. The current `.bat` launchers were checked for ASCII and CRLF formatting on
+Linux; that is file-format evidence, not a current Windows run. GitHub Actions
+status is not inferred here.
 
 ## Remaining validation
 
 - Linux source/test verification on commit
   `849496339bb36d8c2860bc4b98ad19e9d66bf068` passed; rerun if Prolog or test
   sources change after that commit.
-- Run on Windows using the official installer and record OS/build, SWI-Prolog
-  version, command, result, and commit.
+- Re-run this revision on Windows using the official installer and record
+  OS/build, SWI-Prolog version, command, result, and commit. The earlier
+  snapshot's Windows run is historical evidence and does not substitute for it.
 - Observe and record GitHub Actions only if a run is actually available.
 - Perform team/lecturer scope review, oral defense, video upload/link test, and
   final course submission.

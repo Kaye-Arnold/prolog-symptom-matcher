@@ -106,5 +106,7 @@ workflow always invokes it; an empty suite is not treated as a passing scaffold.
 - Stored source qualifications are not interpreted by the matching rule.
 - A high fraction can result from a small denominator; this does not mean higher
   clinical probability. No medical interpretation is assigned to the ranking.
-- The current integration has Linux evidence only. Windows verification must be
-  repeated using the official 64-bit SWI-Prolog installer.
+- The current integration has Linux evidence only. The earlier snapshot did run
+  on Windows with SWI-Prolog 10.0.2 (user-confirmed; see
+  `historical-evidence-index.md`), but Windows verification of this revision
+  must be performed using the official 64-bit SWI-Prolog installer.

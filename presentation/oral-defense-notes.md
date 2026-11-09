@@ -116,6 +116,8 @@ unknown input. It is not used to infer absence of illness.
 
 **What remains unverified?**
 
-The current code has local Linux evidence. Current Windows execution, the live
+The current code has local Linux evidence. The earlier snapshot was executed
+locally on Windows with SWI-Prolog 10.0.2, as the user confirms and the preserved
+record documents, but this revision has not been re-run on Windows. The live
 presentation/defense, video recording/upload, formal scope approval, and final
-assignment submission remain pending unless a later record says otherwise.
+assignment submission also remain pending unless a later record says otherwise.

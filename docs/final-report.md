@@ -28,9 +28,16 @@ The current PLUnit suite contains 64 declarations and had 180 passing
 executions on Linux x86_64 with SWI-Prolog 10.0.2. The test runner rejects an
 empty suite and controlled fact mutations. A real console demo and query example
 were also executed locally. These results establish software behavior only on
-the recorded Linux environment. They do not establish Windows compatibility,
-medical validity, clinical performance, formal scope approval, or completion of
-the required Google Drive video and course submission.
+the recorded Linux environment. They do not establish medical validity, clinical
+performance, formal scope approval, or completion of the required Google Drive
+video and course submission.
+
+The Repomix snapshot that preceded this integration was, as the user confirms,
+executed locally on an actual Windows machine. Its preserved report records a
+Windows SWI-Prolog 10.0.2 run with 57 test declarations and 179 passing
+executions, plus demo and interactive runs. That is historical Windows evidence
+for the earlier snapshot code, not evidence for this revision; the raw Windows
+transcript is not in the recovered archive for independent re-inspection.
 
 ## 1. Problem specification and objectives
 
@@ -208,8 +215,10 @@ set. The corrected assertion now tests the intended intersection; no application
 behavior or coverage goal was weakened.
 
 The source commit for the test run and any later documentation-only commit are
-listed in `docs/test-report.md`. The current integrated source has **not** been
-re-run on Windows. GitHub Actions results are not inferred from local commands.
+listed in `docs/test-report.md`. The earlier snapshot code ran on Windows, as
+recorded in the preserved historical evidence, but the current integrated source
+has **not** been re-run on Windows. GitHub Actions results are not inferred from
+local commands.
 
 ## 5. Limitations and future work
 
@@ -222,8 +231,9 @@ re-run on Windows. GitHub Actions results are not inferred from local commands.
   exists. The ranking may favor shorter lists and has no clinical meaning.
 - Formal team/lecturer approval of scope and scoring remains pending.
 - The current code needs a fresh Windows run using the official 64-bit SWI-Prolog
-  installer. The required oral presentation, Google Drive video upload, link
-  permission check, and final course submission remain human actions.
+  installer; the historical Windows run applies only to the earlier snapshot.
+  The required oral presentation, Google Drive video upload, link permission
+  check, and final course submission remain human actions.
 
 Feasible educational extensions include further tests for captured console
 formats, an expanded set of source-retrieval queries, and clearer presentation of
@@ -262,5 +272,6 @@ Access dates and the exact phrases used are listed in
 - **Video:** pending; no Google Drive URL has been created or supplied.
 - **Sharing permission test:** pending.
 - **Formal scope/team review:** pending.
-- **Current Windows re-verification:** pending.
+- **Current Windows re-verification:** pending. The earlier snapshot did run on
+  Windows (user-confirmed; see the historical evidence index).
 - **Final assignment submission:** pending.

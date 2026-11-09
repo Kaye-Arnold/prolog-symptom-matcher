@@ -1,10 +1,11 @@
 # Windows Setup and Verification Guide
 
-**Current integrated code status:** Windows verification is pending. The
-historical owner-supplied Windows records in
-[`windows-run-record.md`](windows-run-record.md) describe the earlier snapshot
-implementation, not this revision. Do not report the present tests or console as
-Windows-verified until they are run again on Windows.
+**Current integrated code status:** Windows verification is pending. The earlier
+snapshot code was executed locally on Windows with SWI-Prolog 10.0.2, as the
+user confirms and the preserved records in
+[`windows-run-record.md`](windows-run-record.md) document. That run covers the
+earlier snapshot implementation, not this revision. Do not report the present
+tests or console as Windows-verified until they are run again on Windows.
 
 ## 1. Install SWI-Prolog
 
@@ -68,8 +69,8 @@ These are test cases, not health recommendations.
 ## 4. Record and report limitations
 
 - Linux success does not establish Windows compatibility.
-- Historical 9.2.9/10.0.2 records refer to earlier snapshot files and are not a
-  current Windows test result.
+- The earlier snapshot's Windows run (SWI-Prolog 10.0.2) is historical evidence
+  for that snapshot, not a current Windows test result for this revision.
 - Do not change source expectations simply to get a pass. If Windows exposes a
   difference, capture the exact output and interpreter version first.
 - No video recording, Drive upload, or assignment submission is performed by

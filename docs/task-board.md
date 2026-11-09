@@ -30,7 +30,9 @@ course submission availability before hand-off; no course submission is recorded
 2. Verify team member names, registration numbers, roles, and contributions from
    the team's own records.
 3. Run the current integrated revision on Windows with the official 64-bit
-   SWI-Prolog installer and record actual Windows/interpreter output.
+   SWI-Prolog installer and record actual Windows/interpreter output. The earlier
+   snapshot already ran on Windows (user-confirmed, preserved record), but that
+   does not cover this revision.
 4. Record the required project-explanation video, upload it to Google Drive,
    test its sharing permissions, and add the actual link.
 5. Perform the final course submission and record confirmation.

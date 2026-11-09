@@ -39,8 +39,9 @@ artifacts are present. Final submission is **not complete**.
 - [ ] On a Windows machine, install the official 64-bit SWI-Prolog release and
   run the current revision. Record the exact Windows version/build, SWI-Prolog
   version, command(s), result, date, and source commit in a new current-run note
-  (do not edit the preserved historical `docs/windows-run-record.md`). Linux and
-  `.bat` line-ending checks are not Windows execution evidence.
+  (do not edit the preserved historical `docs/windows-run-record.md`). The
+  earlier snapshot's user-confirmed Windows run does not cover this revision.
+  Linux and `.bat` line-ending checks are not current Windows execution evidence.
 - [ ] Deliver the oral defense. Use the notes as preparation, not as evidence
   that a defense occurred.
 - [ ] Record the required project-explanation video from the actual submission

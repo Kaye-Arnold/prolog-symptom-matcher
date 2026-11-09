@@ -43,8 +43,10 @@ it does not direct a user to take a health action.
 - The alias vocabulary is hand-maintained and not a natural-language parser.
 - The current local verification was on Linux x86_64 with SWI-Prolog 10.0.2.
   The current integrated version has not been run on Windows.
-- Historical Windows records refer to the earlier snapshot implementation and
-  are preserved separately; they do not validate this revision.
+- The earlier snapshot code was executed locally on Windows with SWI-Prolog
+  10.0.2, as the user confirms and the preserved records document. That
+  historical run does not validate this revision, and its raw transcript is not
+  available here for independent re-inspection.
 - The required Google Drive video has not been recorded or uploaded.
 - Team member details, roles, and formal scope approval still require human
   confirmation.
