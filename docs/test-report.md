@@ -126,7 +126,25 @@ written and validated locally, but could not be pushed: the connected GitHub App
 lacks `workflows` permission and GitHub rejects any ref update touching
 `.github/workflows/prolog-checks.yml`. The repository workflow therefore remains
 unchanged from the scaffold, and the hardening is recorded as pending rather
-than as delivered. GitHub Actions results are recorded only from observed runs.
+than as delivered.
+
+### Observed GitHub Actions run
+
+| Field | Observed value |
+|---|---|
+| Run | `42581411921`, job `129040753634` |
+| URL | https://github.com/Kaye-Arnold/prolog-symptom-matcher/actions/runs/42581411921 |
+| Trigger | `pull_request` (PR #2), branch `arena/a080307d-prolog-symptom-matcher` |
+| Head SHA | `f7d860f154f42ffe6f1ebbd5341a1b344a61b183` — source and tests identical to `849496339bb36d8c2860bc4b98ad19e9d66bf068`; later commits touch docs and the workflow only |
+| Started / completed | 2026-11-09T07:46:15Z / 07:46:38Z (job 07:46:19–07:46:37Z) |
+| Conclusion | `success`; every step succeeded, including "Check that Prolog files load" and "Run PLUnit suites when defined" |
+
+The step-level conclusions were read from the Actions API. The job's console log
+could not be downloaded in this sandbox (the log endpoint was unreachable), so
+the run is recorded by run/job identity and step conclusions, not by quoting
+output text. The `pull_request` trigger means the workflow ran on this branch's
+merge ref; it does not establish a `main`-only push run, Windows behavior, or CI
+coverage of an empty suite.
 
 ## Remaining validation
 
@@ -136,6 +154,10 @@ than as delivered. GitHub Actions results are recorded only from observed runs.
 - Re-run this revision on Windows using the official installer and record
   OS/build, SWI-Prolog version, command, result, and commit. The earlier
   snapshot's Windows run is historical evidence and does not substitute for it.
-- Observe and record GitHub Actions only if a run is actually available.
+- GitHub Actions run `42581411921` was observed as `success` on this branch; a
+  later docs-only commit starts a new run, so read the current check state on
+  PR #2 rather than assuming this record still describes the tip.
+- Re-apply the hardened workflow step once the GitHub App has `workflows`
+  permission, and re-run CI to confirm it still passes.
 - Perform team/lecturer scope review, oral defense, video upload/link test, and
   final course submission.

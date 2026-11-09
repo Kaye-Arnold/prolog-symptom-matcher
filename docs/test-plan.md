@@ -60,8 +60,9 @@ suite. In a disposable copy, runner controls must confirm:
 4. Each control uses its own isolated copy; verify the untouched working-tree baseline independently.
 
 Observed control outputs and mutation checks are recorded in
-[`test-report.md`](test-report.md). The GitHub Actions run is recorded only if
-actually observed after push.
+[`test-report.md`](test-report.md). GitHub Actions run `42581411921` was observed
+as success after push; its step conclusions are recorded there. The runner's
+empty-suite guard was verified locally, not through that workflow step.
 
 ## 4. Remaining platform and submission verification
 
